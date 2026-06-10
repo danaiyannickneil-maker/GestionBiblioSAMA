@@ -14,11 +14,11 @@
                  Bibliothèque
                 </strong>
                 <li>
-                <button id="login" onclick="">
+                <button id="login" onclick="window.location.href='login.php'">
                  se connecter
                 </button>
-                <button id="inscrire">
-                    s'inscrire
+                <button id="register" onclick="window.location.href='register.php'">
+                 s'inscrire
                 </button>
                 </li>
            
@@ -54,8 +54,8 @@
                 </strong>
             </li>
             <li>  
-                <button id="menu">
-                  Ajouter Livre
+                  <button id="menu" onclick="window.location.href='AjouterLivre.php'">
+                 Ajouter un Livre
                 </button>
             </li>
             <li>
