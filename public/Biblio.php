@@ -1,119 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIBLIOTH7QUE</title>
-    <img src="" alt="">
+    <title>Bibliothèque</title>
+    <link rel="stylesheet" href="../assets/css/Biblio.css"> <!-- ton fichier CSS -->
 </head>
 <body>
+    <!-- En-tête -->
+    <header>
+        <h1>📚 Bibliothèque</h1>
+    </header>
+
+    <!-- Menu de navigation -->
     <nav>
         <ul>
-            <li>
-                <strong>
-                 Bibliothèque
-                </strong>
-                <li>
-                <button id="login" onclick="window.location.href='login.php'">
-                 se connecter
-                </button>
-                <button id="register" onclick="window.location.href='register.php'">
-                 s'inscrire
-                </button>
-                </li>
-           
-                <strong>
-                    Explorer
-                </strong>
-            </li>
-            <li> 
-                <button id="menu">
-                   Thèmes
-                </button>
-            </li>
-            <li> <button id="menu">
-                   En vogue
-                </button>
-            </li>
-            <li>
-                 <button id="menu">
-                   Listes
-                </button>
-            </li>
-            <li> <button id="menu">
-                   Livres au hasard
-                </button>
-            </li>
-            <li>
-                <button id="menu">
-                  Recherche avancé
-                </button>
-             </li>
-                <strong>
-                    Contribuer
-                </strong>
-            </li>
-            <li>  
-                  <button id="menu" onclick="window.location.href='AjouterLivre.php'">
-                 Ajouter un Livre
-                </button>
-            </li>
-            <li>
-                <strong>
-                    Ressources
-                </strong>
-            </li>
-            <li> <button id="menu">
-                   Développeurs
-                </button>
-            </li>
-          
+            <li><button onclick="window.location.href='login.php'">Se connecter</button></li>
+            <li><button onclick="window.location.href='register.php'">S'inscrire</button></li>
+            <li><button>Thèmes</button></li>
+            <li><button>En vogue</button></li>
+            <li><button>Listes</button></li>
+            <li><button>Livres au hasard</button></li>
+            <li><button onclick="window.location.href='SearchAvancé.php'">Recherche avancée</button></li>
+            <li><button onclick="window.location.href='AjouterLivre.php'">Ajouter un livre</button></li>
+            <li><button onclick="window.location.href='Développeurs.txt'">Développeurs</button></li>
         </ul>
     </nav>
 
-<h1>Rechercher les livres</h1>
+    <!-- Formulaire de recherche -->
+    <section>
+        <h2>🔎 Rechercher des livres</h2>
+        <form method="get" action="biblio.php">
+            <input type="text" name="recherche" placeholder="Rechercher un livre...">
+            <button type="submit">Rechercher</button>
+        </form>
+    </section>
 
-<form method="get" action="biblio.php">
-    <input type="text" name ="recherche" placeholder="Rechercher un livre...">
-    <button id="search" type= "submit">Rechercher</button>
-</form>
-<div>
-    <textarea name="Nbresult" id="Nb">
+    <!-- Résultats -->
+    <section id="resultats">
+        <p id="Nbresult">Aucun résultat pour l’instant.</p>
+        <div class="card">
+            <div id="details"></div>
+        </div>
+    </section>
 
-    </textarea>
-</div>
-<div class="card">
-    <div id="details">
-
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <!-- Pied de page -->
+    <?php include("../includes/footer.php"); ?>
 </body>
 </html>
