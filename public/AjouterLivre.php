@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     $service = new LivreService();
-    $result = $service->ajouterLivre($titre, $auteur, $isbn, $editeur, $annee, $categorie, $description, $nb_pages, $langue, $image);
+    $result = $service->ajouterLivre($titre, $auteur, $isbn, $editeur, $annee_publication, $categorie_id, $description, $nb_pages, $langue, $image);
 
     $message = $result ? "✅ Livre ajouté avec succès !" : "❌ Erreur lors de l'ajout.";
 }
