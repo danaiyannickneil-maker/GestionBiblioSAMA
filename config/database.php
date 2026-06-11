@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost;port=3308';
-$dbname = '';  // nom de la base de  données
+$dbname = 'gestion_bibliotheque';  // nom de la base de  données
 $user = 'root'; // Par défaut sur XAMPP/WAMP
 $password = '';
 
