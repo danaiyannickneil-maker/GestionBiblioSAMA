@@ -1,5 +1,15 @@
 <?php
-require_once("../config/database.php");
+// Ensure config is loaded using absolute path
+require_once(__DIR__ . "/../config/database.php");
+
+// Provide a safe fallback for static analysis or missing config file
+if (!class_exists('Database')) {
+    class Database {
+        public static function getConnection() {
+            throw new \Exception('Database class not found. Ensure config/database.php is available.');
+        }
+    }
+}
 
 class LivreDao {
     private $pdo;
