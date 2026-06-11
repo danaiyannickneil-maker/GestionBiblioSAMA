@@ -154,3 +154,5 @@ CREATE TABLE favoris (
 -- 11. RÉACTIVATION DES VÉRIFICATIONS
 -- =====================================================================
 SET FOREIGN_KEY_CHECKS = 1;
+--
+--
