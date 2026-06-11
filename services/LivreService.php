@@ -1,12 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bibliothèque</title>
-    <img src="" alt="logo">
-</head>
-<body>
-    
-</body>
-</html>
+<?php
+require_once("../DAO/LivreDao.php");
+
+class LivreService {
+    private $dao;
+
+    public function __construct() {
+        $this->dao = new LivreDao();
+    }
+
+    public function ajouterLivre($titre, $auteur, $isbn, $editeur, $annee, $categorie, $description, $nb_pages, $langue, $image) {
+        // Règles métier : titre, auteur et ISBN obligatoires
+        if (empty($titre) || empty($auteur) || empty($isbn)) {
+            return false;
+        }
+
+        return $this->dao->insertLivre($titre, $auteur, $isbn, $editeur, $annee, $categorie, $description, $nb_pages, $langue, $image);
+    }
+}
