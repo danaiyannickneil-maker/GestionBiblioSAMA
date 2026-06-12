@@ -18,11 +18,24 @@ class LivreDao {
         $this->pdo = Database::getConnection();
     }
 
-    public function insertLivre($titre, $auteur, $annee, $categorie) {
-        $sql = "INSERT INTO livres (titre, auteur, annee, categorie) VALUES (?, ?, ?, ?)";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([$titre, $auteur, $annee, $categorie]);
-    }
+   public function insertLivre($titre, $auteur, $isbn, $editeur, $annee, $categorie, $description, $nb_pages, $langue, $image) {
+    $sql = "INSERT INTO livres (titre, auteur, ISBN, editeur, annee_publication, categorie, description, nb_pages, langue, image_couverture, date_ajout)
+            VALUES (:titre, :auteur, :isbn, :editeur, :annee, :categorie, :description, :nb_pages, :langue, :image, NOW())";
+
+    $stmt = $this->pdo->prepare($sql);
+    return $stmt->execute([
+        ':titre' => $titre,
+        ':auteur' => $auteur,
+        ':isbn' => $isbn,
+        ':editeur' => $editeur,
+        ':annee' => $annee,
+        ':categorie' => $categorie,
+        ':description' => $description,
+        ':nb_pages' => $nb_pages,
+        ':langue' => $langue,
+        ':image' => $image
+    ]);
+}
 
     public function searchLivres($motCle) {
         $sql = "SELECT * FROM livres 

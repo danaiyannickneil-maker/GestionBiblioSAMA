@@ -3,7 +3,6 @@ require_once("../services/LivreService.php");
 
 $message = "";
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $id= $_POST["id"];
     $titre = $_POST["titre"];
     $auteur = $_POST["auteur"];
     $isbn = $_POST["isbn"];

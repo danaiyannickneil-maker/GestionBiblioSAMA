@@ -14,10 +14,12 @@ class LivreService {
             return false;
         }
 
-        // DAO insertLivre expects 4 arguments: titre, auteur, isbn, editeur
-        return $this->dao->insertLivre($titre, $auteur, $isbn, $editeur);
+        // On transmet TOUS les champs au DAO
+        return $this->dao->insertLivre($titre, $auteur, $isbn, $editeur, $annee, $categorie, $description, $nb_pages, $langue, $image);
     }
+
     public function rechercherLivres($motCle) {
         return $this->dao->searchLivres($motCle);
     }
 }
+?>
