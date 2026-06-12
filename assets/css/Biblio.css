@@ -40,7 +40,11 @@ nav ul li {
     display: inline;
 }
 
-button, .btn-submit {
+button,
+.btn,
+.btn-submit,
+.btn-search,
+.btn-nav {
     background: linear-gradient(135deg, #FF8C00 0%, #FF6B00 100%);
     color: white;
     border: none;
@@ -53,7 +57,11 @@ button, .btn-submit {
     box-shadow: 0 2px 6px rgba(255, 107, 0, 0.2);
 }
 
-button:hover, .btn-submit:hover {
+button:hover,
+.btn:hover,
+.btn-submit:hover,
+.btn-search:hover,
+.btn-nav:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
     background: linear-gradient(135deg, #FF6B00 0%, #E55A00 100%);
@@ -65,11 +73,52 @@ section {
     padding: 0 1rem;
 }
 
-.form-container {
+.search-panel {
     background: white;
-    border-radius: 12px;
-    padding: 2rem;
+    border-radius: 16px;
+    padding: 1.5rem;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.5rem;
+}
+
+.search-panel h2 {
+    margin-bottom: 1rem;
+    color: #1a3a52;
+}
+
+.search-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search-form input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 2px solid #dfe7ef;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+.btn-search {
+    width: 100%;
+    min-width: 170px;
+}
+
+.btn-nav {
+    min-width: 140px;
+    padding: 0.8rem 1.25rem;
+}
+
+@media (max-width: 720px) {
+    .search-form {
+        grid-template-columns: 1fr;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
 }
 
 .form-add-livre {
@@ -139,6 +188,44 @@ section {
     border-left: 4px solid #dc3545;
 }
 
+.result-message {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #1a3a52;
+    font-weight: 500;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+
+.result-card {
+    background: white;
+    border: 1px solid #d6e3f2;
+    border-radius: 14px;
+    padding: 1.25rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.result-card h3 {
+    margin-bottom: 0.75rem;
+    color: #1a3a52;
+}
+
+.result-card p {
+    margin: 0.4rem 0;
+    color: #455a6c;
+}
+
 .card {
     border: 1px solid #e0e0e0;
     padding: 1.5rem;
@@ -152,4 +239,202 @@ section {
 .card:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
+}
+
+.dashboard-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.dash-card {
+    background: white;
+    border: 1px solid #dfe7ef;
+    border-radius: 18px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dash-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+}
+
+.dash-card h3 {
+    margin-bottom: 0.75rem;
+    color: #1a3a52;
+}
+
+.dash-card p {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #FF6B00;
+}
+
+.dashboard-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.dashboard-panel {
+    background: white;
+    border-radius: 18px;
+    padding: 1.75rem;
+    border: 1px solid #dfe7ef;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-panel h2 {
+    margin-bottom: 1rem;
+    color: #1a3a52;
+}
+
+.dashboard-form {
+    display: grid;
+    gap: 1rem;
+}
+
+.dashboard-form .form-group {
+    margin-bottom: 0;
+}
+
+.dashboard-form .btn-submit {
+    width: fit-content;
+    justify-self: start;
+}
+
+.action-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.btn-nav.secondary {
+    background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 100%);
+}
+
+.btn-nav.secondary:hover {
+    background: linear-gradient(135deg, #153c61 0%, #254b84 100%);
+}
+
+.site-footer {
+    background: #f8fbff;
+    padding: 1.5rem 1rem;
+    border-top: 1px solid #dfe7ef;
+    text-align: center;
+    color: #677488;
+    margin-top: 2rem;
+}
+
+.footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.footer-copy,
+.footer-byline {
+    margin: 0.3rem 0;
+}
+
+.dashboard-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.dash-card {
+    background: white;
+    border: 1px solid #dfe7ef;
+    border-radius: 18px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dash-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+}
+
+.dash-card h3 {
+    margin-bottom: 0.75rem;
+    color: #1a3a52;
+}
+
+.dash-card p {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #FF6B00;
+}
+
+.dashboard-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.dashboard-panel {
+    background: white;
+    border-radius: 18px;
+    padding: 1.75rem;
+    border: 1px solid #dfe7ef;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-panel h2 {
+    margin-bottom: 1rem;
+    color: #1a3a52;
+}
+
+.dashboard-form {
+    display: grid;
+    gap: 1rem;
+}
+
+.dashboard-form .form-group {
+    margin-bottom: 0;
+}
+
+.dashboard-form .btn-submit {
+    width: fit-content;
+    justify-self: start;
+}
+
+.action-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.btn-nav.secondary {
+    background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 100%);
+}
+
+.btn-nav.secondary:hover {
+    background: linear-gradient(135deg, #153c61 0%, #254b84 100%);
+}
+
+.site-footer {
+    background: #f8fbff;
+    padding: 1.5rem 1rem;
+    border-top: 1px solid #dfe7ef;
+    text-align: center;
+    color: #677488;
+    margin-top: 2rem;
+}
+
+.footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.footer-copy,
+.footer-byline {
+    margin: 0.3rem 0;
 }

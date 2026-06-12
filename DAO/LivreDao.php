@@ -48,5 +48,56 @@ class LivreDao {
         $stmt->execute([$like, $like, $like, $like]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function searchLivresAvance(array $filtres) {
+        $conditions = [];
+        $params = [];
+
+        if (!empty($filtres['titre'])) {
+            $conditions[] = 'titre LIKE ?';
+            $params[] = '%'.$filtres['titre'].'%';
+        }
+        if (!empty($filtres['auteur'])) {
+            $conditions[] = 'auteur LIKE ?';
+            $params[] = '%'.$filtres['auteur'].'%';
+        }
+        if (!empty($filtres['isbn'])) {
+            $conditions[] = 'ISBN LIKE ?';
+            $params[] = '%'.$filtres['isbn'].'%';
+        }
+        if (!empty($filtres['editeur'])) {
+            $conditions[] = 'editeur LIKE ?';
+            $params[] = '%'.$filtres['editeur'].'%';
+        }
+        if (!empty($filtres['annee'])) {
+            $conditions[] = 'annee_publication = ?';
+            $params[] = $filtres['annee'];
+        }
+        if (!empty($filtres['categorie'])) {
+            $conditions[] = 'categorie LIKE ?';
+            $params[] = '%'.$filtres['categorie'].'%';
+        }
+        if (!empty($filtres['description'])) {
+            $conditions[] = 'description LIKE ?';
+            $params[] = '%'.$filtres['description'].'%';
+        }
+        if (!empty($filtres['nb_pages'])) {
+            $conditions[] = 'nb_pages = ?';
+            $params[] = $filtres['nb_pages'];
+        }
+        if (!empty($filtres['langue'])) {
+            $conditions[] = 'langue LIKE ?';
+            $params[] = '%'.$filtres['langue'].'%';
+        }
+
+        $sql = 'SELECT * FROM livres';
+        if (!empty($conditions)) {
+            $sql .= ' WHERE ' . implode(' AND ', $conditions);
+        }
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 

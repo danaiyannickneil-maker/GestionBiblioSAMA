@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un Livre</title>
-    <link rel="stylesheet" href="../assets/css/Biblio.css">
+    <?php include("../includes/header.php"); ?>
 </head>
 <body>
     <header>

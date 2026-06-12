@@ -21,5 +21,9 @@ class LivreService {
     public function rechercherLivres($motCle) {
         return $this->dao->searchLivres($motCle);
     }
+
+    public function rechercherLivresAvance(array $filtres) {
+        return $this->dao->searchLivresAvance($filtres);
+    }
 }
 ?>
