@@ -2,7 +2,7 @@
 class Database {
     public static function getConnection() {
         $host = "localhost,port=3308";
-        $dbname = "bibliotheque";
+        $dbname = "gestion_bibliotheque";
         $user = "root";
         $pass = "";
 
