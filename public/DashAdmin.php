@@ -8,9 +8,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Administrateur</title>
     <?php include("../includes/header.php"); ?>
+    
+    <style>
+        header {
+            display: flex;
+            justify-content: flex-start; /* Aligne les éléments à gauche */
+            align-items: center;        /* Centre verticalement le logo et le texte */
+            gap: 20px;                  /* Espace agréable entre le logo et le titre */
+            padding: 15px 30px;
+        }
+        .logo-site {
+            height: 70px;               /* Taille optimisée pour la lisibilité du logo */
+            width: auto;  
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.1)); /* Léger relief */
+        }
+        header h1 {
+            font-size: 2.2rem;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
     <header>
+        <img src="../assets/image/Logo.png" alt="Logo Bibliothèque Universitaire" class="logo-site">
         <h1>Dashboard Administrateur</h1>
     </header>
 
