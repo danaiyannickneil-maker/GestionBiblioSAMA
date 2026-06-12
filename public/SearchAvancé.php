@@ -1,9 +1,13 @@
 <?php
+session_start();
 require_once(__DIR__ . "/../services/LivreService.php");
+require_once(__DIR__ . "/../services/EmpruntService.php");
 
-$service = new LivreService();
+$livreService = new LivreService();
+$empruntService = new EmpruntService();
 $resultats = [];
 $message = "Remplissez au moins un champ puis lancez la recherche.";
+$actionPage = "SearchAvancé.php";
 $criteres = [
     'titre' => '',
     'auteur' => '',
@@ -21,14 +25,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $criteres[$key] = trim($_POST[$key] ?? '');
     }
 
+    if (!empty($_POST["action_livre"]) && !empty($_POST["document_id"])) {
+        if (empty($_SESSION["user_id"])) {
+            $message = "Connectez-vous ou inscrivez-vous pour emprunter un livre ou l'ajouter aux favoris.";
+        } elseif ($_POST["action_livre"] === "emprunter") {
+            $result = $empruntService->emprunterLivre($_SESSION["user_id"], $_POST["document_id"]);
+            $message = $result["message"];
+        } elseif ($_POST["action_livre"] === "favori") {
+            $result = $empruntService->ajouterFavori($_SESSION["user_id"], $_POST["document_id"]);
+            $message = $result["message"];
+        }
+    }
+
     $filtreActif = array_filter($criteres, function ($value) {
         return $value !== '';
     });
 
     if (!empty($filtreActif)) {
-        $resultats = $service->rechercherLivresAvance($criteres);
-        $message = count($resultats) > 0 ? count($resultats) . " resultat(s) trouve(s)." : "Aucun resultat trouve pour ces criteres.";
-    } else {
+        $resultats = $livreService->rechercherLivresAvance($criteres);
+        if (empty($_POST["action_livre"])) {
+            $message = count($resultats) > 0 ? count($resultats) . " resultat(s) trouve(s)." : "Aucun resultat trouve pour ces criteres.";
+        }
+    } elseif (empty($_POST["action_livre"])) {
         $message = "Veuillez renseigner au moins un critere de recherche.";
     }
 }
@@ -46,6 +64,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <header>
         <h1>Recherche avancee</h1>
     </header>
+    <section>
+        <button type="button" class="btn-nav secondary" onclick="history.back()">Retour</button>
+        <button type="button" class="btn-nav" onclick="window.location.href='Biblio.php'">Bibliotheque</button>
+    </section>
+
     <section class="form-container">
         <form method="post" action="SearchAvancé.php" class="form-add-livre">
             <div class="form-group">
@@ -88,18 +111,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
 
         <p class="result-message"><?php echo htmlspecialchars($message); ?></p>
+        <?php if (!empty($message) && empty($_SESSION["user_id"]) && !empty($_POST["action_livre"])): ?>
+            <div class="auth-actions">
+                <button class="btn-nav" onclick="window.location.href='login.php'">Se connecter</button>
+                <button class="btn-nav secondary" onclick="window.location.href='register.php'">S'inscrire</button>
+            </div>
+        <?php endif; ?>
 
         <?php if (!empty($resultats)): ?>
             <div class="result-grid">
                 <?php foreach ($resultats as $livre): ?>
-                    <article class="result-card">
-                        <h3><?php echo htmlspecialchars($livre['titre'] ?? ''); ?></h3>
-                        <p><strong>Auteur :</strong> <?php echo htmlspecialchars($livre['auteur'] ?? ''); ?></p>
-                        <p><strong>ISBN :</strong> <?php echo htmlspecialchars($livre['isbn'] ?? ''); ?></p>
-                        <p><strong>Editeur :</strong> <?php echo htmlspecialchars($livre['editeur'] ?? ''); ?></p>
-                        <p><strong>Annee :</strong> <?php echo htmlspecialchars($livre['annee_publication'] ?? ''); ?></p>
-                        <p><strong>Categorie :</strong> <?php echo htmlspecialchars($livre['categorie'] ?? ''); ?></p>
-                    </article>
+                    <?php include(__DIR__ . "/../includes/livre_card.php"); ?>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>

@@ -34,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body class="bg-light">
 <div class="container mt-5" style="max-width: 480px;">
+    <button type="button" class="btn btn-secondary mb-3" onclick="history.back()">Retour</button>
     <div class="card shadow">
         <div class="card-header text-center">
             <h4>Gestion Bibliotheque</h4>
@@ -53,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Se connecter</button>
             </form>
+            <p class="text-center mt-3 mb-0">Pas encore de compte ? <a href="register.php">S'inscrire</a></p>
         </div>
     </div>
 </div>
