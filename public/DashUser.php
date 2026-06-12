@@ -1,5 +1,14 @@
-﻿<?php
-// Dashboard utilisateur UI
+<?php
+session_start();
+require_once(__DIR__ . "/../services/EmpruntService.php");
+
+$utilisateurId = $_SESSION["user_id"] ?? null;
+$user = $_SESSION["user"] ?? [];
+$empruntService = new EmpruntService();
+
+$livresEmpruntes = $utilisateurId ? $empruntService->compterEmpruntsUtilisateur($utilisateurId) : 0;
+$favoris = $utilisateurId ? $empruntService->compterFavorisUtilisateur($utilisateurId) : 0;
+$notifications = $utilisateurId ? $empruntService->compterNotificationsNonLues($utilisateurId) : 0;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -7,7 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Utilisateur</title>
-    <?php include("../includes/header.php"); ?>
+    <?php include(__DIR__ . "/../includes/header.php"); ?>
 </head>
 <body>
     <header>
@@ -16,26 +25,26 @@
 
     <nav>
         <ul>
-            <li><button class="btn-nav" onclick="window.location.href='Biblio.php'">Bibliothèque</button></li>
-            <li><button class="btn-nav secondary" onclick="window.location.href='SearchAvancé.php'">Recherche avancée</button></li>
+            <li><button class="btn-nav" onclick="window.location.href='Biblio.php'">Bibliotheque</button></li>
+            <li><button class="btn-nav secondary" onclick="window.location.href='SearchAvancé.php'">Recherche avancee</button></li>
             <li><button class="btn-nav secondary" onclick="window.location.href='AjouterLivre.php'">Ajouter un livre</button></li>
         </ul>
     </nav>
 
     <section class="dashboard-overview">
         <article class="dash-card">
-            <h3>Livres empruntés</h3>
-            <p>5</p>
+            <h3>Livres empruntes</h3>
+            <p><?php echo htmlspecialchars($livresEmpruntes); ?></p>
             <small>En cours de lecture</small>
         </article>
         <article class="dash-card">
             <h3>Livres favoris</h3>
-            <p>12</p>
-            <small>Sélection personnelle</small>
+            <p><?php echo htmlspecialchars($favoris); ?></p>
+            <small>Selection personnelle</small>
         </article>
         <article class="dash-card">
             <h3>Notifications</h3>
-            <p>3</p>
+            <p><?php echo htmlspecialchars($notifications); ?></p>
             <small>Rappels disponibles</small>
         </article>
     </section>
@@ -46,13 +55,13 @@
             <form class="dashboard-form">
                 <div class="form-group">
                     <label for="user-nom">Nom</label>
-                    <input id="user-nom" type="text" placeholder="Nom" value="Exemple">
+                    <input id="user-nom" type="text" placeholder="Nom" value="<?php echo htmlspecialchars($user['nom'] ?? ''); ?>">
                 </div>
                 <div class="form-group">
                     <label for="user-email">Email</label>
-                    <input id="user-email" type="email" placeholder="Email" value="user@example.com">
+                    <input id="user-email" type="email" placeholder="Email" value="<?php echo htmlspecialchars($user['email'] ?? ''); ?>">
                 </div>
-                <button type="submit" class="btn-submit">Mettre à jour</button>
+                <button type="submit" class="btn-submit">Mettre a jour</button>
             </form>
         </div>
 
@@ -61,11 +70,11 @@
             <div class="action-list">
                 <button class="btn-nav secondary" onclick="window.location.href='SearchAvancé.php'">Rechercher</button>
                 <button class="btn-nav secondary" onclick="window.location.href='AjouterLivre.php'">Ajouter livre</button>
-                <button class="btn-nav secondary" onclick="window.location.href='Biblio.php'">Voir la bibliothèque</button>
+                <button class="btn-nav secondary" onclick="window.location.href='Biblio.php'">Voir la bibliotheque</button>
             </div>
         </div>
     </section>
 
-    <?php include("../includes/footer.php"); ?>
+    <?php include(__DIR__ . "/../includes/footer.php"); ?>
 </body>
 </html>
