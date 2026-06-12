@@ -38,13 +38,13 @@
 
     <!-- Résultats -->
     <section id="resultats">
-        <p id="Nbresult">Aucun résultat pour l’instant.</p>
+        <p id="Nbresult">Aucun résultat pour l'instant.</p>
         <div class="card">
             <div id="details"></div>
         </div>
     </section>
 
-    <!-- Pied de page -->
-    <?php include("../includes/footer.php"); ?>
+
+    
 </body>
 </html>
