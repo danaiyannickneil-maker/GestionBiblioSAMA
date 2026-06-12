@@ -1,0 +1,144 @@
+/* Palette synchronisée avec le logo */
+:root {
+    --green-dark: #0b5b33;
+    --green-medium: #13854a;
+    --gold: #e0a918;
+    --blue-star: #12569c;
+    --text-dark: #22332a;
+    --border-color: #d2ded7;
+}
+
+/* Header style aligné */
+.dev-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 30px;
+}
+
+/* Titres de la page */
+.section-title {
+    color: var(--green-dark);
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    color: #55665c;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 1.5rem auto;
+}
+
+/* Ligne de séparation Or et Bleu (Style académique) */
+.dev-separator {
+    height: 4px;
+    width: 80px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--blue-star) 100%);
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* Cartes des développeurs */
+.dev-card {
+    border: 1px solid var(--border-color) !important;
+    border-radius: 16px !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.dev-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(11, 91, 51, 0.1) !important;
+    border-color: var(--green-medium) !important;
+}
+
+/* Conteneur de l'avatar/photo */
+.dev-avatar-container {
+    background: linear-gradient(135deg, #f4f7f5 0%, #e5ece8 100%);
+    padding: 2.5rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #eef3f0;
+}
+
+.dev-avatar {
+    font-size: 4rem;
+    /* Si vous utilisez des émojis */
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    background: white;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 3px solid var(--gold);
+    /* Rappel de l'or */
+}
+
+/* Remplacer l'émoji par une vraie photo plus tard si besoin */
+.dev-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Détails du texte */
+.dev-name {
+    color: var(--blue-star);
+    /* Bleu des étoiles pour les noms */
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.dev-role {
+    color: var(--green-medium);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.dev-bio {
+    font-size: 0.95rem;
+    color: #4c5e54;
+    min-height: 70px;
+    /* Aligne les hauteurs de texte */
+}
+
+/* Liens réseaux (Style boutons Or du logo) */
+.dev-links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1.5rem;
+}
+
+.dev-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--green-dark);
+    background-color: #f0f6f2;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.dev-link:hover {
+    background-color: var(--gold);
+    color: var(--green-dark);
+    border-color: var(--gold);
+}
+
+/* Bouton actif dans la navigation */
+.active-page {
+    background: linear-gradient(135deg, var(--gold) 0%, #c49212 100%) !important;
+    color: var(--green-dark) !important;
+    border: 1px solid var(--gold) !important;
+}

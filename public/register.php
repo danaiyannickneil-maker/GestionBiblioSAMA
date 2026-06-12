@@ -1,27 +1,50 @@
-<?php session_start(); ?>
+<?php
+session_start();
+require_once(__DIR__ . "/../services/UserServices.php");
+
+$message = "";
+$messageClass = "danger";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $service = new UserServices();
+    $result = $service->inscrire(
+        $_POST["email"] ?? "",
+        $_POST["mdp"] ?? "",
+        $_POST["mdp2"] ?? "",
+        $_POST["nom"] ?? "",
+        $_POST["prenom"] ?? ""
+    );
+
+    $message = $result["message"];
+    $messageClass = $result["success"] ? "success" : "danger";
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Inscription - Gestion Bibliothèque</title>
+    <title>Inscription - Gestion Bibliotheque</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <?php include("../includes/header.php"); ?>
+    <?php include(__DIR__ . "/../includes/header.php"); ?>
     <link rel="stylesheet" href="../assets/css/register.css">
 </head>
 <body class="bg-light">
 <div class="container mt-5" style="max-width: 480px;">
     <div class="card shadow">
         <div class="card-header text-center">
-               <h4>📚 Gestion Bibliothèque</h4>
+            <h4>Gestion Bibliotheque</h4>
         </div>
         <div class="card-body">
+            <?php if ($message): ?>
+                <div class="alert alert-<?php echo $messageClass; ?>"><?php echo htmlspecialchars($message); ?></div>
+            <?php endif; ?>
             <form method="POST">
                 <div class="mb-3">
                     <label>Nom</label>
                     <input type="text" name="nom" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <label>Prénom</label>
+                    <label>Prenom</label>
                     <input type="text" name="prenom" class="form-control" required>
                 </div>
                 <div class="mb-3">

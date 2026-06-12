@@ -1,5 +1,5 @@
 <?php
-require_once("../DAO/LivreDao.php");
+require_once(__DIR__ . "/../DAO/LivreDao.php");
 
 class LivreService {
     private $dao;
@@ -9,12 +9,14 @@ class LivreService {
     }
 
     public function ajouterLivre($titre, $auteur, $isbn, $editeur, $annee = null, $categorie = null, $description = null, $nb_pages = null, $langue = null, $image = null) {
-        // Règles métier : titre, auteur et ISBN obligatoires
-        if (empty($titre) || empty($auteur) || empty($isbn)) {
+        $titre = trim((string) $titre);
+        $auteur = trim((string) $auteur);
+        $isbn = trim((string) $isbn);
+
+        if ($titre === '' || $auteur === '' || $isbn === '') {
             return false;
         }
 
-        // On transmet TOUS les champs au DAO
         return $this->dao->insertLivre($titre, $auteur, $isbn, $editeur, $annee, $categorie, $description, $nb_pages, $langue, $image);
     }
 
@@ -24,6 +26,18 @@ class LivreService {
 
     public function rechercherLivresAvance(array $filtres) {
         return $this->dao->searchLivresAvance($filtres);
+    }
+
+    public function listerLivres() {
+        return $this->dao->getAllLivres();
+    }
+
+    public function compterLivres() {
+        return $this->dao->countLivres();
+    }
+
+    public function compterCategories() {
+        return $this->dao->countCategories();
     }
 }
 ?>
