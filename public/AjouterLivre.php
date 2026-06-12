@@ -38,45 +38,70 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un Livre</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/Biblio.css">
 </head>
 <body>
-    <h1>📚 Ajouter un Livre</h1>
+    <header>
+        <h1>📚 Ajouter un Livre à la Bibliothèque</h1>
+    </header>
+    <section class="form-container">
+        <?php if ($message): ?>
+            <div class="alert <?php echo strpos($message, '✅') !== false ? 'alert-success' : 'alert-error'; ?>"><?php echo $message; ?></div>
+        <?php endif; ?>
+        
+        <form method="post" action="AjouterLivre.php" enctype="multipart/form-data" class="form-add-livre">
+            <div class="form-group">
+                <label for="titre">Titre *</label>
+                <input type="text" id="titre" name="titre" required placeholder="Entrez le titre du livre">
+            </div>
 
-    <form method="post" action="AjouterLivre.php" enctype="multipart/form-data">
-        <label>Titre :</label>
-        <input type="text" name="titre" required><br><br>
+            <div class="form-group">
+                <label for="auteur">Auteur *</label>
+                <input type="text" id="auteur" name="auteur" required placeholder="Entrez le nom de l'auteur">
+            </div>
 
-        <label>Auteur :</label>
-        <input type="text" name="auteur" required><br><br>
+            <div class="form-group">
+                <label for="isbn">ISBN *</label>
+                <input type="text" id="isbn" name="isbn" required placeholder="Entrez le code ISBN">
+            </div>
 
-        <label>ISBN :</label>
-        <input type="text" name="isbn" required><br><br>
+            <div class="form-group">
+                <label for="editeur">Éditeur</label>
+                <input type="text" id="editeur" name="editeur" placeholder="Entrez le nom de l'éditeur">
+            </div>
 
-        <label>Éditeur :</label>
-        <input type="text" name="editeur"><br><br>
+            <div class="form-group">
+                <label for="annee">Année de publication</label>
+                <input type="number" id="annee" name="annee" min="1000" max="2100" placeholder="YYYY">
+            </div>
 
-        <label>Année de publication :</label>
-        <input type="number" name="annee" min="1000" max="2100"><br><br>
+            <div class="form-group">
+                <label for="categorie">Catégorie</label>
+                <input type="text" id="categorie" name="categorie" placeholder="Ex: Fiction, Science, Histoire...">
+            </div>
 
-        <label>Catégorie :</label>
-        <input type="text" name="categorie"><br><br>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4" placeholder="Entrez une description du livre"></textarea>
+            </div>
 
-        <label>Description :</label>
-        <textarea name="description"></textarea><br><br>
+            <div class="form-group">
+                <label for="nb_pages">Nombre de pages</label>
+                <input type="number" id="nb_pages" name="nb_pages" min="1" placeholder="300">
+            </div>
 
-        <label>Nombre de pages :</label>
-        <input type="number" name="nb_pages" min="1"><br><br>
+            <div class="form-group">
+                <label for="langue">Langue</label>
+                <input type="text" id="langue" name="langue" placeholder="Ex: Français, Anglais...">
+            </div>
 
-        <label>Langue :</label>
-        <input type="text" name="langue"><br><br>
+            <div class="form-group">
+                <label for="image">Image de couverture</label>
+                <input type="file" id="image" name="image" accept="image/*">
+            </div>
 
-        <label>Image de couverture :</label>
-        <input type="file" name="image" accept="image/*"><br><br>
-
-        <button type="submit">Ajouter</button>
-    </form>
-
-    <p style="color:green;"><?php echo $message; ?></p>
+            <button type="submit" class="btn-submit">✓ Ajouter le Livre</button>
+        </form>
+    </section>
 </body>
 </html>
