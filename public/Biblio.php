@@ -19,7 +19,7 @@ if (!empty($_GET["recherche"])) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
+
     <title>Bibliothèque Universitaire</title>
     <?php include("../includes/header.php"); ?>
     <link rel="stylesheet" href="../assets/css/Biblio.css">
@@ -86,8 +86,6 @@ if (!empty($_GET["recherche"])) {
         <?php endif; ?>
     </section>
 
-
-    <?php include("../includes/footer.php"); ?>
 
     <?php include(__DIR__ . "/../includes/footer.php"); ?>
 </body>
