@@ -23,5 +23,17 @@ class EmpruntService {
     public function compterFavorisUtilisateur($utilisateurId) {
         return $this->dao->countFavorisByUser($utilisateurId);
     }
+
+    public function emprunterLivre($utilisateurId, $documentId) {
+        return $this->dao->emprunterDocument((int) $utilisateurId, (int) $documentId);
+    }
+
+    public function ajouterFavori($utilisateurId, $documentId) {
+        return $this->dao->ajouterFavori((int) $utilisateurId, (int) $documentId);
+    }
+
+    public function listerFavoris($utilisateurId) {
+        return $this->dao->getFavorisByUser((int) $utilisateurId);
+    }
 }
 ?>

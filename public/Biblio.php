@@ -1,17 +1,35 @@
 <?php
+session_start();
 require_once(__DIR__ . "/../services/LivreService.php");
+require_once(__DIR__ . "/../services/EmpruntService.php");
 
-$service = new LivreService();
+$livreService = new LivreService();
+$empruntService = new EmpruntService();
 $livres = [];
-$message = "Aucun resultat pour l'instant.";
+$message = "Recherchez un livre par titre, auteur, ISBN, langue ou categorie.";
+$actionPage = "Biblio.php" . (!empty($_GET["recherche"]) ? "?recherche=" . urlencode($_GET["recherche"]) : "");
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST["action_livre"]) && !empty($_POST["document_id"])) {
+    if (empty($_SESSION["user_id"])) {
+        $message = "Connectez-vous ou inscrivez-vous pour emprunter un livre ou l'ajouter aux favoris.";
+    } elseif ($_POST["action_livre"] === "emprunter") {
+        $result = $empruntService->emprunterLivre($_SESSION["user_id"], $_POST["document_id"]);
+        $message = $result["message"];
+    } elseif ($_POST["action_livre"] === "favori") {
+        $result = $empruntService->ajouterFavori($_SESSION["user_id"], $_POST["document_id"]);
+        $message = $result["message"];
+    }
+}
 
 if (!empty($_GET["recherche"])) {
     $motCle = trim($_GET["recherche"]);
     if ($motCle !== '') {
-        $livres = $service->rechercherLivres($motCle);
-        $message = count($livres) > 0
-            ? count($livres) . " resultat(s) trouve(s)."
-            : "Aucun livre trouve pour cette recherche.";
+        $livres = $livreService->rechercherLivres($motCle);
+        if (empty($_POST["action_livre"])) {
+            $message = count($livres) > 0
+                ? count($livres) . " resultat(s) trouve(s)."
+                : "Aucun livre trouve pour cette recherche.";
+        }
     }
 }
 ?>
@@ -55,7 +73,8 @@ if (!empty($_GET["recherche"])) {
             <li><button class="btn-nav" onclick="window.location.href='login.php'">Se connecter</button></li>
             <li><button class="btn-nav" onclick="window.location.href='register.php'">S'inscrire</button></li>
             <li><button class="btn-nav" onclick="window.location.href='AjouterLivre.php'">Ajouter un livre</button></li>
-            <li><button class="btn-nav" onclick="window.location.href='SearchAvancé.php'">Recherche avancee</button></li>
+            <li><button class="btn-nav secondary" onclick="window.location.href='Favoris.php'">Mes favoris</button></li>
+            <li><button class="btn-nav secondary" onclick="window.location.href='SearchAvancé.php'">Recherche avancee</button></li>
         </ul>
     </nav>
 
@@ -70,17 +89,17 @@ if (!empty($_GET["recherche"])) {
 
     <section id="resultats">
         <p class="result-message"><?php echo htmlspecialchars($message); ?></p>
+        <?php if (!empty($message) && empty($_SESSION["user_id"]) && $_SERVER["REQUEST_METHOD"] === "POST"): ?>
+            <div class="auth-actions">
+                <button class="btn-nav" onclick="window.location.href='login.php'">Se connecter</button>
+                <button class="btn-nav secondary" onclick="window.location.href='register.php'">S'inscrire</button>
+            </div>
+        <?php endif; ?>
+
         <?php if (!empty($livres)): ?>
             <div class="result-grid">
                 <?php foreach ($livres as $livre): ?>
-                    <article class="result-card">
-                        <h3><?php echo htmlspecialchars($livre['titre'] ?? ''); ?></h3>
-                        <p><strong>Auteur :</strong> <?php echo htmlspecialchars($livre['auteur'] ?? ''); ?></p>
-                        <p><strong>ISBN :</strong> <?php echo htmlspecialchars($livre['isbn'] ?? ''); ?></p>
-                        <p><strong>Editeur :</strong> <?php echo htmlspecialchars($livre['editeur'] ?? ''); ?></p>
-                        <p><strong>Annee :</strong> <?php echo htmlspecialchars($livre['annee_publication'] ?? ''); ?></p>
-                        <p><strong>Categorie :</strong> <?php echo htmlspecialchars($livre['categorie'] ?? ''); ?></p>
-                    </article>
+                    <?php include(__DIR__ . "/../includes/livre_card.php"); ?>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>

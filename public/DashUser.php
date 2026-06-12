@@ -9,6 +9,7 @@ $empruntService = new EmpruntService();
 $livresEmpruntes = $utilisateurId ? $empruntService->compterEmpruntsUtilisateur($utilisateurId) : 0;
 $favoris = $utilisateurId ? $empruntService->compterFavorisUtilisateur($utilisateurId) : 0;
 $notifications = $utilisateurId ? $empruntService->compterNotificationsNonLues($utilisateurId) : 0;
+$nomComplet = trim(($user['prenom'] ?? '') . ' ' . ($user['nom'] ?? ''));
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,6 +22,9 @@ $notifications = $utilisateurId ? $empruntService->compterNotificationsNonLues($
 <body>
     <header>
         <h1>Dashboard Utilisateur</h1>
+        <?php if ($nomComplet !== ''): ?>
+            <p class="dashboard-user">Connecte : <?php echo htmlspecialchars($nomComplet); ?></p>
+        <?php endif; ?>
     </header>
 
     <nav>
@@ -70,6 +74,7 @@ $notifications = $utilisateurId ? $empruntService->compterNotificationsNonLues($
             <div class="action-list">
                 <button class="btn-nav secondary" onclick="window.location.href='SearchAvancé.php'">Rechercher</button>
                 <button class="btn-nav secondary" onclick="window.location.href='AjouterLivre.php'">Ajouter livre</button>
+                <button class="btn-nav secondary" onclick="window.location.href='Favoris.php'">Mes favoris</button>
                 <button class="btn-nav secondary" onclick="window.location.href='Biblio.php'">Voir la bibliotheque</button>
             </div>
         </div>
