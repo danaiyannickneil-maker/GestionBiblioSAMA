@@ -15,17 +15,37 @@ if (!empty($_GET["recherche"])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Bibliothèque</title>
+    <title>Bibliothèque Universitaire</title>
     <?php include("../includes/header.php"); ?>
+    <link rel="stylesheet" href="../assets/css/Biblio.css">
+
+    <style>
+        header {
+            display: flex;
+            justify-content: flex-start; /* Aligne les éléments à gauche */
+            align-items: center;        /* Centre verticalement le logo et le texte */
+            gap: 20px;                  /* Espace agréable entre le logo et le titre */
+            padding: 15px 30px;
+        }
+        .logo-site {
+            height: 70px;               /* Taille optimisée pour la lisibilité du logo */
+            width: auto;  
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.1)); /* Léger relief */
+        }
+        header h1 {
+            font-size: 2.2rem;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>📚 Bibliothèque</h1>
+        <img src="../assets/image/Logo.png" alt="Logo Bibliothèque Universitaire" class="logo-site">
+        <h1>Bibliothèque Universitaire</h1>
     </header>
 
     <nav>
@@ -40,7 +60,7 @@ if (!empty($_GET["recherche"])) {
     <section class="search-panel">
         <h2>Rechercher des livres</h2>
         <form method="get" action="biblio.php" class="search-form">
-            <input type="text" name="recherche" placeholder="Rechercher un livre..." value="<?php echo isset($_GET['recherche']) ? htmlspecialchars($_GET['recherche']) : ''; ?>">
+            <input type="text" name="recherche" placeholder="Rechercher par titre, auteur, ISBN..." value="<?php echo isset($_GET['recherche']) ? htmlspecialchars($_GET['recherche']) : ''; ?>">
             <button type="submit" class="btn-search">Rechercher</button>
         </form>
     </section>
@@ -63,7 +83,6 @@ if (!empty($_GET["recherche"])) {
         <?php endif; ?>
     </section>
 
-    <!-- Pied de page -->
     <?php include("../includes/footer.php"); ?>
 </body>
 </html>
