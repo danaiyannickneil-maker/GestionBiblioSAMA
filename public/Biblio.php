@@ -54,6 +54,8 @@ if (isset($_GET["recherche"]) && !empty($_GET["recherche"])) {
             <li><button onclick="window.location.href='login.php'">Se connecter</button></li>
             <li><button onclick="window.location.href='register.php'">S'inscrire</button></li>
             <li><button onclick="window.location.href='AjouterLivre.php'">Ajouter un livre</button></li>
+            <li><button onclick="window.location.href='SearchAvancé.php'">Recherhce avancé</button></li>
+            
         </ul>
     </nav>
 
