@@ -45,7 +45,7 @@
                         <p class="dev-role">Chef de Projet & Back-End</p>
                         <p class="dev-bio">Gestion de la base de données SQL, de la logique PHP et de l'architecture des services.</p>
                         <div class="dev-links">
-                            <a href=": https://github.com/Jareotsen" target="_blank" class="dev-link">GitHub</a>
+                            <a href="#" target="_blank" class="dev-link">GitHub</a>
                             <a href="#" target="_blank" class="dev-link">LinkedIn</a>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                         <p class="dev-role">Designer UI/UX & Front-End</p>
                         <p class="dev-bio">Intégration des maquettes, création du design système CSS basé sur l'identité du logo.</p>
                         <div class="dev-links">
-                            <a href="https://github.com/Bignagni" target="_blank" class="dev-link">GitHub</a>
+                            <a href="#" target="_blank" class="dev-link">GitHub</a>
                             <a href="#" target="_blank" class="dev-link">LinkedIn</a>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                         <p class="dev-role">Développeur Full-Stack</p>
                         <p class="dev-bio">Connexion des formulaires PHP avec le visuel, sécurité des sessions et tests applicatifs.</p>
                         <div class="dev-links">
-                            <a href="https://github.com/BlackZheus66" target="_blank" class="dev-link">GitHub</a>
+                            <a href="#" target="_blank" class="dev-link">GitHub</a>
                             <a href="#" target="_blank" class="dev-link">LinkedIn</a>
                         </div>
                     </div>
