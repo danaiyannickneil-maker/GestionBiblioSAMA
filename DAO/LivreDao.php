@@ -1,5 +1,6 @@
 <?php
 // Ensure config is loaded using absolute path
+// Commit
 require_once(__DIR__ . "/../config/database.php");
 
 // Provide a safe fallback for static analysis or missing config file
