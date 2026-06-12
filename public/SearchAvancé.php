@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SearchAvancé</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
    <form method="post" action="SearchAvancé.php" enctype="multipart/form-data">
