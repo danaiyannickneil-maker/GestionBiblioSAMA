@@ -68,27 +68,13 @@ if (isset($_GET["recherche"]) && !empty($_GET["recherche"])) {
     </section>
 
     <section id="resultats">
-        <?php if (!empty($livres)): ?>
-            <p id="Nbresult"><?php echo count($livres); ?> résultat(s) trouvé(s)</p>
-            <?php foreach ($livres as $livre): ?>
-                <div class="card">
-                    <img src="<?php echo $livre['image_couverture']; ?>" alt="Couverture" width="120">
-                    <h3><?php echo htmlspecialchars($livre['titre']); ?></h3>
-                    <p><strong>Auteur :</strong> <?php echo htmlspecialchars($livre['auteur']); ?></p>
-                    <p><strong>ISBN :</strong> <?php echo htmlspecialchars($livre['ISBN']); ?></p>
-                    <p><strong>Éditeur :</strong> <?php echo htmlspecialchars($livre['editeur']); ?></p>
-                    <p><strong>Année :</strong> <?php echo htmlspecialchars($livre['annee_publication']); ?></p>
-                    <p><strong>Catégorie :</strong> <?php echo htmlspecialchars($livre['categorie']); ?></p>
-                    <p><strong>Pages :</strong> <?php echo htmlspecialchars($livre['nb_pages']); ?></p>
-                    <p><strong>Langue :</strong> <?php echo htmlspecialchars($livre['langue']); ?></p>
-                    <p><strong>Description :</strong> <?php echo nl2br(htmlspecialchars($livre['description'])); ?></p>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p id="Nbresult">Aucun résultat pour l’instant.</p>
-        <?php endif; ?>
+        <p id="Nbresult">Aucun résultat pour l’instant.</p>
+        <div class="card">
+            <div id="details"></div>
+        </div>
     </section>
 
+    <!-- Pied de page -->
     <?php include("../includes/footer.php"); ?>
 </body>
 </html>

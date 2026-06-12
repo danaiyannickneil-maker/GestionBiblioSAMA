@@ -1,0 +1,24 @@
+body {
+    background-color: #e9f1fb;
+}
+
+.card-header {
+    background-color: navy;
+    color: #ffffff;
+    text-align: center;
+}
+
+.card-header h4 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.btn {
+    background-color: navy;
+    color: #ffffff;
+    border: none;
+}
+
+.btn:hover {
+    background-color: navy;
+}
