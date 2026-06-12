@@ -16,4 +16,7 @@ class LivreService {
 
         return $this->dao->insertLivre($titre, $auteur, $isbn, $editeur, $annee, $categorie, $description, $nb_pages, $langue, $image);
     }
+    public function rechercherLivres($motCle) {
+        return $this->dao->searchLivres($motCle);
+    }
 }
