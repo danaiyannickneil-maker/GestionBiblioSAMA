@@ -23,4 +23,17 @@ class LivreDao {
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([$titre, $auteur, $annee, $categorie]);
     }
+
+    public function searchLivres($motCle) {
+        $sql = "SELECT * FROM livres 
+                WHERE titre LIKE ? 
+                   OR auteur LIKE ? 
+                   OR ISBN LIKE ? 
+                   OR categorie LIKE ?";
+        $stmt = $this->pdo->prepare($sql);
+        $like = "%".$motCle."%";
+        $stmt->execute([$like, $like, $like, $like]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
+
