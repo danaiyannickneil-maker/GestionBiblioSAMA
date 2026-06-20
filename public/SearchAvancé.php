@@ -44,88 +44,107 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!empty($filtreActif)) {
         $resultats = $livreService->rechercherLivresAvance($criteres);
         if (empty($_POST["action_livre"])) {
-            $message = count($resultats) > 0 ? count($resultats) . " resultat(s) trouve(s)." : "Aucun resultat trouve pour ces criteres.";
+            $message = count($resultats) > 0 ? count($resultats) . " résultat(s) trouvé(s)." : "Aucun résultat trouvé pour ces critères.";
         }
     } elseif (empty($_POST["action_livre"])) {
-        $message = "Veuillez renseigner au moins un critere de recherche.";
+        $message = "Veuillez renseigner au moins un critère de recherche.";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recherche avancée</title>
+    <title>Recherche avancée - BU SAMA</title>
     <?php include(__DIR__ . "/../includes/header.php"); ?>
 </head>
 <body>
-    <header>
-        <h1>Recherche avancee</h1>
-    </header>
-    <section>
-        <button type="button" class="btn-nav secondary" onclick="history.back()">Retour</button>
-        <button type="button" class="btn-nav" onclick="window.location.href='Biblio.php'">Bibliotheque</button>
-    </section>
 
-    <section class="form-container">
-        <form method="post" action="SearchAvancé.php" class="form-add-livre">
-            <div class="form-group">
-                <label for="titre">Titre</label>
-                <input type="text" id="titre" name="titre" value="<?php echo htmlspecialchars($criteres['titre']); ?>">
-            </div>
-            <div class="form-group">
-                <label for="auteur">Auteur</label>
-                <input type="text" id="auteur" name="auteur" value="<?php echo htmlspecialchars($criteres['auteur']); ?>">
-            </div>
-            <div class="form-group">
-                <label for="isbn">ISBN</label>
-                <input type="text" id="isbn" name="isbn" value="<?php echo htmlspecialchars($criteres['isbn']); ?>">
-            </div>
-            <div class="form-group">
-                <label for="editeur">Editeur</label>
-                <input type="text" id="editeur" name="editeur" value="<?php echo htmlspecialchars($criteres['editeur']); ?>">
-            </div>
-            <div class="form-group">
-                <label for="annee">Annee de publication</label>
-                <input type="number" id="annee" name="annee" min="1000" max="2100" value="<?php echo htmlspecialchars($criteres['annee']); ?>">
-            </div>
-            <div class="form-group">
-                <label for="categorie">Categorie</label>
-                <input type="text" id="categorie" name="categorie" value="<?php echo htmlspecialchars($criteres['categorie']); ?>">
-            </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description" name="description"><?php echo htmlspecialchars($criteres['description']); ?></textarea>
-            </div>
-            <div class="form-group">
-                <label for="nb_pages">Nombre de pages</label>
-                <input type="number" id="nb_pages" name="nb_pages" min="1" value="<?php echo htmlspecialchars($criteres['nb_pages']); ?>">
-            </div>
-            <div class="form-group">
-                <label for="langue">Langue</label>
-                <input type="text" id="langue" name="langue" value="<?php echo htmlspecialchars($criteres['langue']); ?>">
-            </div>
-            <button type="submit" class="btn-submit">Recherche avancee</button>
-        </form>
+    <?php include(__DIR__ . "/../includes/navbar.php"); ?>
 
-        <p class="result-message"><?php echo htmlspecialchars($message); ?></p>
-        <?php if (!empty($message) && empty($_SESSION["user_id"]) && !empty($_POST["action_livre"])): ?>
-            <div class="auth-actions">
-                <button class="btn-nav" onclick="window.location.href='login.php'">Se connecter</button>
-                <button class="btn-nav secondary" onclick="window.location.href='register.php'">S'inscrire</button>
-            </div>
-        <?php endif; ?>
+    <div class="container my-4">
+        
+        <div class="form-container">
+            <a href="Biblio.php" class="back-link">
+                <i class="fa-solid fa-arrow-left me-1"></i> Retour à la bibliothèque
+            </a>
 
-        <?php if (!empty($resultats)): ?>
-            <div class="result-grid">
-                <?php foreach ($resultats as $livre): ?>
-                    <?php include(__DIR__ . "/../includes/livre_card.php"); ?>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
-    </section>
+            <h2 class="mb-4 text-success-green" style="color: var(--green-dark); font-family: 'Outfit'; font-weight: 700;">
+                <i class="fa-solid fa-magnifying-glass me-2 text-gold"></i> Recherche avancée
+            </h2>
+
+            <form method="post" action="SearchAvancé.php" class="form-add-livre">
+                <div class="form-group">
+                    <label for="titre">Titre</label>
+                    <input type="text" id="titre" name="titre" placeholder="Titre du livre..." value="<?php echo htmlspecialchars($criteres['titre']); ?>">
+                </div>
+                <div class="form-group">
+                    <label for="auteur">Auteur</label>
+                    <input type="text" id="auteur" name="auteur" placeholder="Auteur..." value="<?php echo htmlspecialchars($criteres['auteur']); ?>">
+                </div>
+                <div class="form-group">
+                    <label for="isbn">ISBN</label>
+                    <input type="text" id="isbn" name="isbn" placeholder="Code ISBN..." value="<?php echo htmlspecialchars($criteres['isbn']); ?>">
+                </div>
+                <div class="form-group">
+                    <label for="editeur">Editeur</label>
+                    <input type="text" id="editeur" name="editeur" placeholder="Éditeur..." value="<?php echo htmlspecialchars($criteres['editeur']); ?>">
+                </div>
+                <div class="form-group">
+                    <label for="annee">Année de publication</label>
+                    <input type="number" id="annee" name="annee" min="1000" max="2100" placeholder="YYYY" value="<?php echo htmlspecialchars($criteres['annee']); ?>">
+                </div>
+                <div class="form-group">
+                    <label for="categorie">Catégorie</label>
+                    <input type="text" id="categorie" name="categorie" placeholder="Ex: Informatique, Sciences..." value="<?php echo htmlspecialchars($criteres['categorie']); ?>">
+                </div>
+                <div class="form-group">
+                    <label for="nb_pages">Nombre de pages</label>
+                    <input type="number" id="nb_pages" name="nb_pages" min="1" placeholder="Ex: 300" value="<?php echo htmlspecialchars($criteres['nb_pages']); ?>">
+                </div>
+                <div class="form-group">
+                    <label for="langue">Langue</label>
+                    <input type="text" id="langue" name="langue" placeholder="Ex: Français, Anglais..." value="<?php echo htmlspecialchars($criteres['langue']); ?>">
+                </div>
+                <div class="form-group full-width">
+                    <label for="description">Mots-clés de la description</label>
+                    <textarea id="description" name="description" placeholder="Mots contenus dans le résumé du livre..."><?php echo htmlspecialchars($criteres['description']); ?></textarea>
+                </div>
+                <button type="submit" class="btn-submit"><i class="fa-solid fa-search me-1"></i> Lancer la recherche avancée</button>
+            </form>
+        </div>
+
+        <!-- Section des Résultats -->
+        <div class="mt-5">
+            <h2 class="mb-3 text-success-green" style="color: var(--green-dark); font-family: 'Outfit'; font-weight: 700;">
+                <i class="fa-solid fa-square-poll-horizontal me-2 text-gold"></i> Résultats de la recherche
+            </h2>
+
+            <?php if ($message): ?>
+                <div class="alert <?php echo (str_contains($message, 'trouvé(s)')) ? 'alert-success' : 'alert-danger'; ?> shadow-sm">
+                    <i class="fa-solid <?php echo (str_contains($message, 'trouvé(s)')) ? 'fa-circle-check' : 'fa-circle-info'; ?> me-2"></i>
+                    <?php echo htmlspecialchars($message); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($message) && empty($_SESSION["user_id"]) && !empty($_POST["action_livre"])): ?>
+                <div class="d-flex gap-2 justify-content-center my-3">
+                    <a href="login.php" class="btn btn-action-primary"><i class="fa-solid fa-sign-in-alt me-1"></i> Se connecter</a>
+                    <a href="register.php" class="btn btn-action-secondary"><i class="fa-solid fa-user-plus me-1"></i> S'inscrire</a>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($resultats)): ?>
+                <div class="result-grid mt-4">
+                    <?php foreach ($resultats as $livre): ?>
+                        <?php include(__DIR__ . "/../includes/livre_card.php"); ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
+    </div>
+
     <?php include(__DIR__ . "/../includes/footer.php"); ?>
 </body>
 </html>

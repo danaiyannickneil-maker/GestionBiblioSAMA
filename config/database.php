@@ -3,7 +3,7 @@
 class Database {
     public static function getConnection() {
         $host = 'localhost';   // adresse du serveur
-        $port = '3308';        // port MySQL (confirmé dans phpMyAdmin)
+        $port = '3306';        // port MySQL (confirmé dans phpMyAdmin)
         $dbname = 'gestion_bibliotheque';
         $user = 'root';
         $pass = '';

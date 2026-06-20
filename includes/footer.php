@@ -1,7 +1,7 @@
 <footer class="site-footer">
     <div class="footer-content">
         <p class="footer-copy">&copy; <?php echo date('Y'); ?> Groupe 4 : Système de Gestion de bibliothèque</p>
-        <p class="footer-byline">Made by Jokias Knight, Lésita -wp et BlackZheuss ♠</p>
+        <p class="footer-byline">Made by Jokias Knight, Lésita et BlackZheuss </p>
     </div>
 </footer>
 

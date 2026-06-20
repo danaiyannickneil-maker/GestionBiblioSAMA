@@ -24,25 +24,34 @@ $livres = $service->listerFavoris($_SESSION["user_id"]);
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Mes favoris</title>
+    <title>Mes favoris - BU SAMA</title>
     <?php include(__DIR__ . "/../includes/header.php"); ?>
 </head>
 <body>
-    <header>
-        <h1>Mes favoris</h1>
-    </header>
 
-    <section>
-        <button type="button" class="btn-nav secondary" onclick="history.back()">Retour</button>
-        <button type="button" class="btn-nav" onclick="window.location.href='Biblio.php'">Bibliotheque</button>
-    </section>
+    <?php include(__DIR__ . "/../includes/navbar.php"); ?>
 
-    <section id="resultats">
+    <section class="container my-4">
+        
+        <a href="DashUser.php" class="back-link">
+            <i class="fa-solid fa-arrow-left me-1"></i> Retour au Dashboard
+        </a>
+
+        <h2 class="mb-4" style="color: var(--green-dark); font-family: 'Outfit'; font-weight: 700;">
+            <i class="fa-solid fa-heart me-2 text-danger"></i> Mes livres favoris
+        </h2>
+
         <?php if ($message): ?>
-            <div class="alert alert-success"><?php echo htmlspecialchars($message); ?></div>
+            <div class="alert alert-success shadow-sm">
+                <i class="fa-solid fa-circle-check me-2"></i> <?php echo htmlspecialchars($message); ?>
+            </div>
         <?php endif; ?>
 
-        <p class="result-message"><?php echo count($livres) > 0 ? count($livres) . " favori(s)." : "Vous n'avez pas encore de favoris."; ?></p>
+        <div class="alert alert-success bg-light text-dark shadow-sm py-3 mb-4">
+            <i class="fa-solid fa-info-circle me-2 text-success-green"></i> 
+            <?php echo count($livres) > 0 ? "Vous avez " . count($livres) . " livre(s) dans votre sélection." : "Vous n'avez pas encore de favoris. Parcourez la bibliothèque pour en ajouter."; ?>
+        </div>
+
         <?php if (!empty($livres)): ?>
             <div class="result-grid">
                 <?php foreach ($livres as $livre): ?>
